@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Strength Evolution - Your Name</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #afafaf;
+            background: 
+                linear-gradient(rgba(10, 15, 45, 0.55), rgba(32, 28, 95, 0.55)),
+                 url('https://upload.wikimedia.org/wikipedia/commons/0/01/Vincent_van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: white;
+            animation: fadeIn 1s ease-in;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .tagline {
+            font-size: 1.5em;
+            opacity: 0.95;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.578);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin-top: 20px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .paper-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255, 198, 10, 0.754);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin-top: 20px;
+        }
+
+        .paper-link:hover {
+            background: rgba(252, 212, 15, 0.634);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .project-meta {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .project-meta strong {
+            color: #444;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+
+        h2 {
+            color: #e67e22;
+            margin-bottom: 30px;
+            margin-top: 40px;
+            font-size: 2.2em;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #e67e22, #f39c12);
+            border-radius: 2px;
+        }
+
+        h2:first-of-type {
+            margin-top: 20px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        p {
+            color: #0f0f18;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.2em;
+        }
+
+        .links-section {
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .links-section h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .link-list {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .link-list li {
+            margin: 0;
+        }
+
+        .link-list a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .link-list a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .key-findings {
+            background: #fff5db;
+            border-left: 4px solid #e67e22;
+            padding: 25px 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .key-findings h3 {
+            color: #e67e22;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .key-findings ul {
+            margin-left: 20px;
+        }
+
+        .key-findings li {
+            margin-bottom: 12px;
+            color: #231515;
+            line-height: 1.7;
+            font-size: 1.1em;
+        }
+
+        .figure {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .figure-caption {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 15px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .collaborators {
+            background: #f8f9fa;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .collaborators h3 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        .collaborators p {
+            color: #555;
+            margin: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            font-size: 0.95em;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .link-list {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Scrutinizing Young Barred Galaxies: Spatially Resolved Analysis of Barred Galaxies at <em>z></em> 1 </h1>
+            <p class="tagline" style="text-align: center;">Yuchen Guo, Shardha Jogee, Eden Wise and the CEERS Collaboration</p>
+            <a href="index.html" class="back-link">← Back to Home</a>
+            <a href="mailto:kayguo98@utexas.edu" class="paper-link"> Request Draft</a>
+        </header>
+
+        <div class="content">
+            <div class="project-meta">
+                <strong>Status:</strong> <span class="status-badge">In prep., 2025, Draft Available upon Request</span>
+            </div>
+
+            <section class="section">
+                <p>
+                Stellar bars are considered an important driver of the secular evolution of disk galaxies, 
+                as they can induce gas inflows through shocks and gravitational torque. Specifically, the impact of stellar bars on different regions of the disk 
+                can be different on a kilo-parsec scale (PSF of JWST NIRCam image at <em>z</em>~ 1-2): 
+                stellar bars can drive gas into the inner region and increase the inner region surface gas density,
+                leading to enhanced star formation in the central region, while bar taking gas from outside and reducing star formation efficiency in the outer region and along the bar. 
+                While spatially resolved analyses of star formation in barred galaxies exist at <em>z</em>~ 0,  such studies are largely unexplored at <em>z</em>~ 1-2, offering an opportunity to investigate the emergence of bar-driven effects at the peak of cosmic star formation. 
+                </p>
+
+                <p>
+                <em>The goal of this project is, fully leveraging the power of JWST NIRCam data, 
+                to understand the assembly history of galaxies and capture the active impact 
+                of bars on galaxy properties across different regions within a galaxy. </em>
+                </p>
+
+                <p>
+                With high-resolution deep rest-frame UV to NIR data, I performed <b>spatially resolved SED fitting</b> using BAGPIPES that includes modeling of nebular emission and a flexible non-parametric star formation history to obtain properties on dust and star formation on a kilo-parsec scale 
+                for a sample of barred galaxies at <em>z></em>1. Each galaxy contains a few thousands of individual pixels and we explored different methods of pixel binning. Thanks to the Texas Advanced Computing Center resources, we were able to significantly speed up the fitting processes with parallel computing.
+                </p>
+
+                <p>
+                <em>Details will be added when paper is published, stay tuned :)</em>
+                </p>
+
+            </section>
+
+            <section class="section">
+
+                 <div class="key-findings">
+                    <h3>Key Findings</h3>
+                    <ul>
+                        <li> Section will be updated when paper is published </li>
+                    </ul>
+                </div>
+
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Yuchen Guo. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
